@@ -1,70 +1,66 @@
-"use client";
 import Image from "next/image";
+import Reveal from "../ui/Reveal";
 
-interface DataCardsProps {
-  id: number;
-  img: string;
-  title: string;
-  description: string;
-}
-
-const dataCards: DataCardsProps[] = [
+const reasons = [
   {
     id: 1,
     img: "/images/motivo1.png",
-    title: "MOTIVO #1",
-    description: "Nuestra excelente capacidad en brindar un servicio confiable y rápida: En Covirnet, entendemos que la velocidad y la confiabilidad son fundamentales cuando se trata de tu conexión a internet."
+    title: "Servicio confiable y rápido",
+    description:
+      "Entendemos que la velocidad y la confiabilidad son fundamentales cuando se trata de tu conexión a internet.",
   },
   {
     id: 2,
     img: "/images/motivo2.png",
-    title: "MOTIVO #2",
-    description: "Atención al cliente excepcional: En Covirnet, nos preocupamos por la satisfacción de nuestros clientes y nos esforzamos por brindar un servicio de atención al cliente excepcional."
+    title: "Atención al cliente excepcional",
+    description:
+      "Nos preocupamos por la satisfacción de nuestros clientes y nos esforzamos por brindar una atención excepcional.",
   },
   {
     id: 3,
     img: "/images/motivo3.png",
-    title: "MOTIVO #3",
-    description: "Variedad de servicios y opciones flexibles: En Covirnet, comprendemos que cada cliente es único y tiene necesidades diferentes cuando se trata de su conexión a internet."
+    title: "Opciones flexibles",
+    description:
+      "Cada cliente es único y tiene necesidades diferentes. Por eso ofrecemos una variedad de servicios y planes.",
   },
-]
+];
 
 export default function ChooseUsComponent() {
   return (
-    <>
-      <section className="flex flex-col lg:flex-col justify-center items-center sm:flex-wrap lg:flex-nowrap gap-10 w-[95%] lg:h-[70vh] mt-5 m-auto px-5 py-10 bg-[url(/images/About/bg_image_choose_us.svg)] bg-cover rounded-lg">
+    <section className="relative overflow-hidden bg-navy-950 py-16 text-white sm:py-20 lg:py-24">
+      <div className="absolute inset-0 bg-grid" aria-hidden />
+      <div className="pointer-events-none absolute right-0 top-0 h-80 w-80 rounded-full bg-brand-orange/20 blur-3xl" aria-hidden />
+      <div className="wrap relative">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow">Ventajas</span>
+          <h2 className="mt-4 font-display text-3xl font-extrabold text-white sm:text-4xl">
+            ¿Por qué elegirnos?
+          </h2>
+        </Reveal>
 
-        <h1 className="text-center font-bold text-4xl text-white">
-          ¿POR QUÉ ELEGIRNOS?
-        </h1>
-
-        <div className="flex flex-row justify-around items-center flex-wrap lg:nowrap w-full py-2">
-          {dataCards.map((item) => {
-            return (
-              <>
-
-                <div className="flex flex-col gap-5 justify-center items-center lg:w-[25%] lg:justify-between lg:py-3 lg:px-2 lg:h-full">
-                  <div className="flex items-center justify-center w-24 h-24 rounded-full m-auto bg-gray-400">
-
-                    <Image
-                      src={item.img}
-                      width={300}
-                      height={100}
-                      alt="Logo"
-                      className="rounded-full m-auto "
-                    />
-
-                  </div>
-                  <h2 className="font-bold text-white">{item.title}</h2>
-                  <p className="text-white text-justify h-1/2 ">
-                    {item.description}
-                  </p>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {reasons.map((item, i) => (
+            <Reveal key={item.id} delay={i * 0.1}>
+              <article className="h-full rounded-2xl border border-white/10 bg-white/5 p-7 text-center backdrop-blur transition-colors hover:border-brand-amber/50 hover:bg-white/10">
+                <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full ring-4 ring-brand-amber/40">
+                  <Image
+                    src={item.img}
+                    alt={item.title}
+                    fill
+                    sizes="96px"
+                    className="object-cover"
+                  />
                 </div>
-              </>
-            )
-          })}
+                <p className="mt-5 text-xs font-bold uppercase tracking-widest text-brand-amber">
+                  Motivo #{item.id}
+                </p>
+                <h3 className="mt-1 text-xl font-bold text-white">{item.title}</h3>
+                <p className="mt-3 leading-relaxed text-white/65">{item.description}</p>
+              </article>
+            </Reveal>
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

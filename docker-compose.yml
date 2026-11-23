@@ -1,0 +1,24 @@
+services:
+  covirnet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: WEB_CLIENTE__COVIRNET
+    ports:
+      - "8180:3000"
+    # Variables de entorno en RUNTIME (EMAIL_USER / EMAIL_CODE para el formulario de contacto).
+    # El Dockerfile NO copia .env a la imagen final, por eso se inyectan aqui.
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - covirnet_net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  covirnet_net:
+    driver: bridge

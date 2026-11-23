@@ -1,103 +1,81 @@
-"use client";
-import React from "react";
-
+import Link from "next/link";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { navigationLinks } from "@/constants/navigation";
 import { linksInteres } from "@/constants/links_interes";
-import Image from "next/image";
-import Link from "next/link";
+import { contactInfo } from "@/constants/contact";
+import { Logo } from "../Header/NavigationMenu";
+
+const linkClass = "text-sm text-white/65 transition-colors hover:text-brand-amber";
 
 export default function Footer() {
   return (
-    <>
-      <section className="flex flex-col lg:flex-row gap-3 z-30 w-[95%] m-auto mt-5 border-2 border-black bg-[url(/images/Hero/background_hero_image.svg)] bg-no-repeat bg-cover bg-fixed rounded-lg py-5">
-        <div className="max-w-screen-xl w-full mx-auto px-6 sm:px-8 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:pl-16">
-          
-          <div className="lg:col-span-1 flex flex-col items-start lg:mr-8"> {/* Agregamos un margen derecho para la primera columna */}
-            <div className="lg:w-[100%]">
-              <Image
-                src="/images/Hero/logo_hero_image.svg"
-                width={300}
-                height={100}
-                alt="Logo"
-                className=""
-              />
-            </div>
-            <p className="mb-4">
-              <strong className="font-medium">¡La Velocidad que necesitas!</strong> No lo pienses más, Covirnet es tu mejor opción.
-            </p>
-          </div>
-
-          {/* SECTOR DE LINKS 1 */}
-          <div className="md:col-span-1 lg:col-span-1 flex flex-col lg:ml-8"> {/* Agregamos un margen izquierdo para las otras tres columnas */}
-            <p className="text-black-600 mb-4 font-medium text-lg">Links rápidos</p>
-            <div className="flex flex-col">
-              {navigationLinks.map((item_link) => (
-                <Link
-                  className="my-2 hover:text-orange-500 cursor-pointer transition-all"
-                  href={item_link.path}
-                  key={item_link.id}
-                >
-                  {item_link.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-          {/* SECTOR DE LINKS 2 */}
-          <div className="md:col-span-1 lg:col-span-1 flex flex-col lg:ml-8"> {/* Agregamos un margen izquierdo para las otras tres columnas */}
-            <p className="text-black-600 mb-4 font-medium text-lg">Links de interés</p>
-            <div className="flex flex-col ">
-              {linksInteres.map((interes) => (
-                <Link
-                  className="my-2 hover:text-orange-500 cursor-pointer transition-all"
-                  key={interes.id}
-                  href={interes.path}
-                  prefetch={false}
-                >
-                  {interes.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-          {/* SECTOR DE LINKS 3 */}
-          <div className="md:col-span-1 lg:col-span-1 flex flex-col lg:ml-8"> {/* Agregamos un margen izquierdo para las otras tres columnas */}
-            <p className="text-black-600 mb-4 font-medium text-lg">Links de contactos</p>
-            <div className="flex flex-col ">
-              <Link
-                className="my-2 hover:text-orange-500 cursor-pointer transition-all"
-                href="tel:+593959884635"
-                prefetch={false}
-              >
-                Ventas y soporte
-              </Link>
-              <Link
-                className="my-2 hover:text-orange-500 cursor-pointer transition-all"
-                href="mailto:covir.net@gmail.com"
-                prefetch={false}
-              >
-                Correo ventas
-              </Link>
-              <Link
-                className="my-2 hover:text-orange-500 cursor-pointer transition-all"
-                href="mailto:covirnetsoporte@gmail.com"
-                prefetch={false}
-              >
-                Correo soporte
-              </Link>
-              <Link
-                className="my-2 hover:text-orange-500 cursor-pointer transition-all"
-                href="https://maps.app.goo.gl/PfmkTYPABR6estif7"
-                prefetch={false}
-                target="_blank"
-              >
-                Dirección
-              </Link>
-            </div>
-          </div>
+    <footer className="relative mt-8 overflow-hidden bg-navy-950 text-white">
+      <div className="pointer-events-none absolute -left-24 top-0 h-64 w-64 rounded-full bg-brand-orange/15 blur-3xl" aria-hidden />
+      <div className="wrap relative grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <Logo light />
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/65">
+            <strong className="font-semibold text-white">¡La velocidad que necesitas!</strong>{" "}
+            No lo pienses más, Covirnet es tu mejor opción.
+          </p>
         </div>
-      </section>
-      <div className="border-t border-gray-300 py-4 w-full">
-        <p className="text-gray-400 text-center">©{new Date().getFullYear()} Inigualitysoft</p>
+
+        <div>
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Links rápidos</h3>
+          <ul className="space-y-2.5">
+            {navigationLinks.map((item) => (
+              <li key={item.id}>
+                <Link href={item.path} className={linkClass}>{item.title}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Links de interés</h3>
+          <ul className="space-y-2.5">
+            {linksInteres.map((item) => (
+              <li key={item.id}>
+                <a href={item.path} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Contacto</h3>
+          <ul className="space-y-3">
+            <li>
+              <a href={contactInfo.phoneHref} className={`${linkClass} flex items-center gap-2`}>
+                <Phone className="h-4 w-4 text-brand-amber" /> Ventas y soporte
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${contactInfo.salesEmail}`} className={`${linkClass} flex items-center gap-2`}>
+                <Mail className="h-4 w-4 text-brand-amber" /> Correo ventas
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${contactInfo.supportEmail}`} className={`${linkClass} flex items-center gap-2`}>
+                <Mail className="h-4 w-4 text-brand-amber" /> Correo soporte
+              </a>
+            </li>
+            <li>
+              <a href={contactInfo.mapsUrl} target="_blank" rel="noopener noreferrer" className={`${linkClass} flex items-center gap-2`}>
+                <MapPin className="h-4 w-4 text-brand-amber" /> Dirección
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </>
+
+      <div className="relative border-t border-white/10 py-5">
+        <p className="wrap text-center text-xs text-white/45">
+          © {new Date().getFullYear()} Covirnet · Desarrollado por Inigualitysoft
+        </p>
+      </div>
+    </footer>
   );
 }

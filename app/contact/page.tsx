@@ -1,12 +1,16 @@
-"use client";
-
+import type { Metadata } from "next";
+import PageHeader from "@/components/ui/PageHeader";
 import ContactComponent from "@/components/Contact/ContactComponent";
-import Hero from "@/components/Hero/Hero";
+
+export const metadata: Metadata = { title: "Contacto" };
 
 export default function Contact() {
   return (
     <>
-      <Hero title="Contactos" />
+      <PageHeader
+        title="Contacto"
+        subtitle="¿Tienes alguna duda? Escríbenos y te responderemos lo antes posible."
+      />
       <ContactComponent />
     </>
   );
